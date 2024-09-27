@@ -1,7 +1,13 @@
-import type { ResolverProps } from '@composabase/sdk'
+import type { ResolverProps } from "@composabase/sdk";
 
 export default async function Resolver({ args }: ResolverProps) {
-  const { name = 'World', isImportant = false } = args 
+  const { name = "World", isImportant = false } = args;
 
-  return `Hello ${name}${isImportant ? '!' : ''}`
+  return {
+    message: `Hello, ${name}!`,
+    data: {
+      isImportant,
+      name,
+    },
+  };
 }

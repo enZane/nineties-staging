@@ -1,22 +1,26 @@
-import { schema } from "@composabase/sdk"
+import { schema } from "@composabase/sdk";
 
-import helloCustom from './modules/hello-custom'
-import nineties from './modules/nineties'
+import helloCustom from "./modules/hello-custom";
+import nineties from "./modules/nineties";
 
-schema.query('hello', {
+schema.type("HelloResponse", {
+  fields: {
+    message: schema.string(),
+    data: schema.scalar("JSON"),
+  },
+});
+
+schema.query("hello", {
   definition: {
-    type: schema.string(),
+    type: schema.scalar("HelloResponse"),
     args: {
       name: schema.string().optional(),
       isImportant: schema.boolean().optional(),
     },
   },
-  resolver: 'hello',
-})
+  resolver: "hello",
+});
 
-schema.modules([
-  helloCustom,
-  nineties,
-])
+schema.modules([helloCustom, nineties]);
 
-export default schema
+export default schema;
